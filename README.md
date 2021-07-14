@@ -59,7 +59,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allowed_origins"></a> [allowed\_origins](#input\_allowed\_origins) | n/a | `list` | <pre>[<br>  "*"<br>]</pre> | no |
-| <a name="input_name"></a> [name](#input\_name) | n/a | `any` | n/a | yes |
+| <a name="input_bucket_name_prefix"></a> [bucket\_name\_prefix](#input\_bucket\_name\_prefix) | n/a | `any` | n/a | yes |
 | <a name="input_notification_prefixes"></a> [notification\_prefixes](#input\_notification\_prefixes) | n/a | `list` | `[]` | no |
 | <a name="input_read_only_principals"></a> [read\_only\_principals](#input\_read\_only\_principals) | n/a | `list` | `[]` | no |
 | <a name="input_read_write_principals"></a> [read\_write\_principals](#input\_read\_write\_principals) | n/a | `list` | `[]` | no |
