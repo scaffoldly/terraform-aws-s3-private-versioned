@@ -3,7 +3,7 @@ data "aws_partition" "current" {}
 
 locals {
   root_arn            = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:${var.root_principal}"
-  notification_topics = formatlist("s3-${var.bucket_name_prefix}-%s-notifications", replace(replace(var.notification_prefixes, ".", "-"), "/[^a-zA-Z0-9_\\-]/", ""))
+  notification_topics = formatlist("s3-${var.bucket_name_prefix}-%s-notifications", var.notification_prefixes)
 
   read_only_principals = jsonencode(
     concat(
@@ -96,8 +96,8 @@ data "aws_iam_policy_document" "policy" {
 resource "aws_sns_topic" "topic" {
   count = length(local.notification_topics)
 
-  name         = local.notification_topics[count.index]
-  display_name = local.notification_topics[count.index]
+  name         = replace(replace(local.notification_topics[count.index], ".", "-"), "/[^a-zA-Z0-9_\\-]/", "")
+  display_name = replace(replace(local.notification_topics[count.index], ".", "-"), "/[^a-zA-Z0-9_\\-]/", "")
 
   policy = data.aws_iam_policy_document.policy.json
 }
