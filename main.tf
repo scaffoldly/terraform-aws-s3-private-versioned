@@ -99,11 +99,29 @@ resource "aws_sns_topic" "topic" {
   name         = replace(replace(local.notification_topics[count.index], ".", "-"), "/[^a-zA-Z0-9_\\-]/", "")
   display_name = replace(replace(local.notification_topics[count.index], ".", "-"), "/[^a-zA-Z0-9_\\-]/", "")
 
-  policy = data.aws_iam_policy_document.policy.json
-
   depends_on = [
     aws_s3_bucket_policy.policy
   ]
+}
+
+resource "aws_sns_topic_policy" "s3_policy" {
+  count = length(local.notification_topics)
+  arn   = aws_sns_topic.topic[count.index].arn
+
+  policy = <<POLICY
+{
+    "Version":"2012-10-17",
+    "Statement":[{
+        "Effect": "Allow",
+        "Principal": {"AWS":"*"},
+        "Action": "sns:Publish",
+        "Resource": "${aws_sns_topic.topic[count.index].arn}",
+        "Condition":{
+            "ArnLike":{"aws:SourceArn":"${aws_s3_bucket.bucket.arn}"}
+        }
+    }]
+}
+POLICY
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
@@ -120,5 +138,9 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
       filter_prefix = topic.key
     }
   }
+
+  depends_on = [
+    aws_sns_topic_policy.s3_policy
+  ]
 }
 

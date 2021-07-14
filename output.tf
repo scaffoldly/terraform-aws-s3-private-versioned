@@ -4,6 +4,6 @@ output "bucket_name" {
 }
 
 output "topic_arns" {
-  value       = aws_sns_topic.topic[*].arn
+  value       = aws_sns_topic.topic.*.arn
   description = "The topic ARNs created (if any)"
 }
