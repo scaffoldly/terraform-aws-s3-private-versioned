@@ -5,7 +5,7 @@
     {
       "Effect": "Allow",
       "Principal": {
-        "Service": "${write_only_services}"
+        "Service": ${jsonencode(write_only_services)}
       },
       "Action": [
         "s3:PutObject*"
