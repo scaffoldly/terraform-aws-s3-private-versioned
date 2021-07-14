@@ -100,6 +100,10 @@ resource "aws_sns_topic" "topic" {
   display_name = replace(replace(local.notification_topics[count.index], ".", "-"), "/[^a-zA-Z0-9_\\-]/", "")
 
   policy = data.aws_iam_policy_document.policy.json
+
+  depends_on = [
+    aws_s3_bucket_policy.policy
+  ]
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
