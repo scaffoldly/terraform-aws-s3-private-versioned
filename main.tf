@@ -3,7 +3,7 @@ data "aws_partition" "current" {}
 
 locals {
   root_arn            = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:${var.root_principal}"
-  notification_topics = formatlist("s3-${var.name}-%s-notifications", var.notification_prefixes)
+  notification_topics = formatlist("s3-${var.bucket_name_prefix}-%s-notifications", var.notification_prefixes)
 
   read_only_principals = jsonencode(
     concat(
@@ -28,7 +28,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket_prefix = var.name
+  bucket_prefix = var.bucket_name_prefix
   acl           = "private"
 
   versioning {

@@ -1,4 +1,4 @@
-variable "name" {}
+variable "bucket_name_prefix" {}
 
 variable "read_only_principals" {
   default = []
