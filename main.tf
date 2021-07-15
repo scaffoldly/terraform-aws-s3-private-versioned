@@ -133,7 +133,7 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
   }
 
   depends_on = [
-    aws_sns_topic_policy.s3_policy
+    aws_sns_topic_policy.sns_policy
   ]
 }
 
