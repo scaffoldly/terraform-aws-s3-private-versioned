@@ -108,20 +108,13 @@ resource "aws_sns_topic_policy" "s3_policy" {
   count = length(local.notification_topics)
   arn   = aws_sns_topic.topic[count.index].arn
 
-  policy = <<POLICY
-{
-    "Version":"2012-10-17",
-    "Statement":[{
-        "Effect": "Allow",
-        "Principal": {"AWS":"*"},
-        "Action": "sns:Publish",
-        "Resource": "${aws_sns_topic.topic[count.index].arn}",
-        "Condition":{
-            "ArnLike":{"aws:SourceArn":"${aws_s3_bucket.bucket.arn}"}
-        }
-    }]
-}
-POLICY
+  policy = templatefile("${path.module}/topic_policy.json.tpl", {
+    topic_arn             = aws_sns_topic.topic[count.index].arn
+    bucket_arn            = aws_s3_bucket.bucket.arn
+    read_only_principals  = local.read_only_principals
+    read_write_principals = local.read_write_principals
+    write_only_principals = local.write_only_principals
+  })
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
