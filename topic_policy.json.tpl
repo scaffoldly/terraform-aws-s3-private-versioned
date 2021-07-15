@@ -24,7 +24,7 @@
         "AWS": ${read_only_principals}
       },
       "Action": [
-        "sns:*Subscribe*"
+        "sns:Subscribe"
       ],
       "Resource": [
         "${topic_arn}"
@@ -36,8 +36,8 @@
         "AWS": ${read_write_principals}
       },
       "Action": [
-        "sns:*Subscribe*",
-        "sns:*Publish*"
+        "sns:Subscribe",
+        "sns:Publish"
       ],
       "Resource": [
         "${topic_arn}"
@@ -49,7 +49,7 @@
         "AWS": ${write_only_principals}
       },
       "Action": [
-        "sns:*Publish*"
+        "sns:Publish"
       ],
       "Resource": [
         "${topic_arn}"
