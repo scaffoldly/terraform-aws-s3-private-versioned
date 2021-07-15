@@ -104,7 +104,7 @@ resource "aws_sns_topic" "topic" {
   ]
 }
 
-resource "aws_sns_topic_policy" "s3_policy" {
+resource "aws_sns_topic_policy" "sns_policy" {
   count = length(local.notification_topics)
   arn   = aws_sns_topic.topic[count.index].arn
 
