@@ -42,6 +42,14 @@ resource "aws_s3_bucket" "bucket" {
       }
     }
   }
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_origins = ["*"]
+    allowed_methods = ["GET", "PUT", "POST", "DELETE", "HEAD"]
+    expose_headers  = ["Content-Length", "Content-Type", "ETag"]
+    max_age_seconds = 86400
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "block" {
