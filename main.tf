@@ -3,7 +3,7 @@ data "aws_partition" "current" {}
 
 locals {
   root_arn            = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:${var.root_principal}"
-  notification_topics = formatlist("s3-${var.bucket_name_prefix}-%s-notifications", var.notification_prefixes)
+  notification_topics = formatlist("${var.bucket_name_prefix}-s3%s", var.notification_prefixes)
 
   read_only_principals = jsonencode(
     concat(
