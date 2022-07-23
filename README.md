@@ -61,6 +61,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket_name_prefix"></a> [bucket\_name\_prefix](#input\_bucket\_name\_prefix) | A prefix name for the bucket | `string` | n/a | yes |
 | <a name="input_notification_prefixes"></a> [notification\_prefixes](#input\_notification\_prefixes) | The object prefixes to create SNS notifications for (e.g. ['folder1/', 'folder2/'] or [''] for everything) | `list` | `[]` | no |
+| <a name="input_public_access"></a> [public\_access](#input\_public\_access) | n/a | `bool` | `false` | no |
 | <a name="input_read_only_principals"></a> [read\_only\_principals](#input\_read\_only\_principals) | The ARNs of users/roles/etc that have read-only access to the bucket | `list` | `[]` | no |
 | <a name="input_read_write_principals"></a> [read\_write\_principals](#input\_read\_write\_principals) | The ARNs of users/roles/etc that have read-write access to the bucket | `list` | `[]` | no |
 | <a name="input_root_principal"></a> [root\_principal](#input\_root\_principal) | The root prinicipal. In most cases leave this as 'root' | `string` | `"root"` | no |
