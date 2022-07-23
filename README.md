@@ -60,6 +60,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket_name_prefix"></a> [bucket\_name\_prefix](#input\_bucket\_name\_prefix) | A prefix name for the bucket | `string` | n/a | yes |
+| <a name="input_bucket_name_random_suffix"></a> [bucket\_name\_random\_suffix](#input\_bucket\_name\_random\_suffix) | Set the bucket name to be suffixed with a random string | `bool` | `true` | no |
 | <a name="input_notification_prefixes"></a> [notification\_prefixes](#input\_notification\_prefixes) | The object prefixes to create SNS notifications for (e.g. ['folder1/', 'folder2/'] or [''] for everything) | `list` | `[]` | no |
 | <a name="input_public_access"></a> [public\_access](#input\_public\_access) | n/a | `bool` | `false` | no |
 | <a name="input_read_only_principals"></a> [read\_only\_principals](#input\_read\_only\_principals) | The ARNs of users/roles/etc that have read-only access to the bucket | `list` | `[]` | no |
