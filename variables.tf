@@ -3,6 +3,12 @@ variable "bucket_name_prefix" {
   description = "A prefix name for the bucket"
 }
 
+variable "bucket_name_random_suffix" {
+  type        = bool
+  default     = true
+  description = "Set the bucket name to be suffixed with a random string"
+}
+
 variable "read_only_principals" {
   default     = []
   description = "The ARNs of users/roles/etc that have read-only access to the bucket"
