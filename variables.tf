@@ -32,3 +32,7 @@ variable "notification_prefixes" {
   default     = []
   description = "The object prefixes to create SNS notifications for (e.g. ['folder1/', 'folder2/'] or [''] for everything)"
 }
+
+variable "public_access" {
+  default = false
+}
