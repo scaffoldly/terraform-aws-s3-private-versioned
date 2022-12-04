@@ -28,8 +28,8 @@ locals {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket        = var.bucket_name_random_suffix ? null : var.bucket_name_prefix
-  bucket_prefix = var.bucket_name_random_suffix ? var.bucket_name_prefix : null
+  bucket        = var.bucket_name_random_suffix == true ? null : var.bucket_name_prefix
+  bucket_prefix = var.bucket_name_random_suffix == true ? var.bucket_name_prefix : null
   acl           = "private"
 
   versioning {
