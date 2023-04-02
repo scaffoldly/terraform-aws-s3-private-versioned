@@ -24,6 +24,11 @@ variable "write_only_principals" {
   description = "The ARNs of users/roles/etc that have write-only access to the bucket"
 }
 
+variable "read_only_services" {
+  default     = []
+  description = "The AWS services that have read-only access to the bucket (e.g. ses.amazonaws.com, lambda.amazonaws.com)"
+}
+
 variable "write_only_services" {
   default     = []
   description = "The AWS services that have write-only access to the bucket (e.g. ses.amazonaws.com, lambda.amazonaws.com)"
