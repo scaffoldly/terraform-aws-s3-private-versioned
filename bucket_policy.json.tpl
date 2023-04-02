@@ -21,6 +21,27 @@
       }
     },
     %{ endif }
+    %{ if length(read_only_services) != 0 }
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": ${jsonencode(read_only_services)}
+      },
+      "Action": [
+        "s3:Get*",
+        "s3:List*"
+      ],
+      "Resource": [
+        "arn:${partition}:s3:::${bucket_name}",
+        "arn:${partition}:s3:::${bucket_name}/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:Referer": "${account}"
+        }
+      }
+    },
+    %{ endif }
     {
       "Effect": "Allow",
       "Principal": {

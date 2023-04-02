@@ -72,6 +72,7 @@ resource "aws_s3_bucket_policy" "policy" {
     read_only_principals  = local.read_only_principals
     read_write_principals = local.read_write_principals
     write_only_principals = local.write_only_principals
+    read_only_services    = var.read_only_services
     write_only_services   = var.write_only_services
   })
 
