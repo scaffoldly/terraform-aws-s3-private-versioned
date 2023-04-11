@@ -29,6 +29,11 @@ variable "read_only_services" {
   description = "The AWS services that have read-only access to the bucket (e.g. ses.amazonaws.com, lambda.amazonaws.com)"
 }
 
+variable "read_only_services_condition" {
+  type    = map(any)
+  default = {}
+}
+
 variable "write_only_services" {
   default     = []
   description = "The AWS services that have write-only access to the bucket (e.g. ses.amazonaws.com, lambda.amazonaws.com)"

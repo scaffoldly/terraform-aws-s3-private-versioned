@@ -35,11 +35,7 @@
         "arn:${partition}:s3:::${bucket_name}",
         "arn:${partition}:s3:::${bucket_name}/*"
       ],
-      "Condition": {
-        "StringEquals": {
-          "aws:Referer": "${account}"
-        }
-      }
+      "Condition": ${jsonencode(read_only_services_condition)}
     },
     %{ endif }
     {

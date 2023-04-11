@@ -25,6 +25,8 @@ locals {
       var.write_only_principals
     )
   )
+
+  read_only_services_condition = length(keys(var.read_only_services_condition)) != 0 ? var.read_only_services_condition : { StringEquals = { "aws:Referer" = data.aws_caller_identity.current.account_id } }
 }
 
 resource "aws_s3_bucket" "bucket" {
@@ -66,14 +68,15 @@ resource "aws_s3_bucket_policy" "policy" {
   bucket = aws_s3_bucket.bucket.id
 
   policy = templatefile("${path.module}/bucket_policy.json.tpl", {
-    partition             = data.aws_partition.current.partition
-    account               = data.aws_caller_identity.current.account_id
-    bucket_name           = aws_s3_bucket.bucket.id
-    read_only_principals  = local.read_only_principals
-    read_write_principals = local.read_write_principals
-    write_only_principals = local.write_only_principals
-    read_only_services    = var.read_only_services
-    write_only_services   = var.write_only_services
+    partition                    = data.aws_partition.current.partition
+    account                      = data.aws_caller_identity.current.account_id
+    bucket_name                  = aws_s3_bucket.bucket.id
+    read_only_principals         = local.read_only_principals
+    read_write_principals        = local.read_write_principals
+    write_only_principals        = local.write_only_principals
+    read_only_services           = var.read_only_services
+    read_only_services_condition = local.read_only_services_condition
+    write_only_services          = var.write_only_services
   })
 
   depends_on = [
